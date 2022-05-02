@@ -1,0 +1,47 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+    <%- include('../includes/navbar.ejs') %>
+    <main>
+        <% if (prods.length>0){ %>
+        <div class="grid">
+            <% for(let product of prods){ %>
+            <article class="card product-item">
+                <header class="card__header">
+                    <h1 class="product__title"><%=product.title%></h1>
+                </header>
+                <a style="text-decoration: none;color: inherit;" href="/products/<%=product._id%>">
+                    <div class="card__image">
+                        <img src="/<%=product.imageUrl%>">
+                    </div>
+                    <div class="card__content">
+                        <h2 class="product__price">₹<%=product.price%></h2>
+                        <p class="product__description"><%=product.description%></p>
+                    </div>
+                </a>
+                <div class="card__actions">
+                    <%- include('../includes/addToCart.ejs',{product:product}) %>
+                </div>
+            </article>
+            <% } %>
+        </div>
+        <% } else{ %>
+        <h>No Products</h>
+        <% } %>
+        <%- include('../includes/pagination.ejs') %>
+    </main>
+    <footer class="copyright">
+        <%if(isAuth) {%>
+        <ul>
+          <li><a href="/admin/add-product">Add Product</a></li>
+          <li><a href="/admin/admin-products">Admin Products</a></li>
+          <li><a>All Rights Reserved BooksOnCart.com</a></li>
+        </ul>
+        <%}%>
+    
+      </footer>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<section class="pagination">
+    <% if (currentPage!==1){ %>
+    <a href="/?page=1" style="text-decoration: none; color: inherit;"><button class="bttn">1</button></a>
+    <%}%>
+    <% if (hasPreviousPage && previousPage!==1){ %>
+    <a href="/?page=<%=previousPage%>" style="text-decoration: none; color: inherit;"><button
+        class="bttn"><%=previousPage%></button></a>
+    <%}%>
+    <a href="/?page=<%=currentPage%>" style="text-decoration: none; color: inherit;"><button class="bttn">
+      <%= currentPage %></button></a>
+    <% if (hasNextPage){ %>
+    <a href="/?page=<%=nextPage%>" style="text-decoration: none; color: inherit;"><button
+        class="bttn"><%=nextPage%></button></a>
+    <%}%>
+    <% if (lastPage!==currentPage && nextPage !== lastPage){ %>
+      <p  style=" font-size: 2em;text-align: center;  color: #00695c; margin-top: 0;">......</p>
+    <a href="/?page=<%=lastPage%> " style="text-decoration: none; color: inherit;"><button class="bttn"><%= lastPage %></button></a>
+    <%}%>
+
+  </section>

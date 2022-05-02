@@ -1,0 +1,64 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/forms.css">
+<link rel="stylesheet" href="/css/product.css">
+<style>
+    .alert{
+        border: 1px solid red;
+        text-align: center;
+        border-radius: 5px;
+        background-color: rgb(244, 253, 190);
+        color: red;
+    }
+</style>
+</head>
+<body>
+    <%- include('../includes/navbar.ejs') %>
+
+    <main>
+        <form class="product-form" action="/admin/<% if(editing){%>edit-product<%} else{%>add-product<%}%> " method="POST" style="margin-top: 5em;" enctype="multipart/form-data">
+            <% if(errMsg) {%>
+				<div class="alert"role="alert">
+					<%= errMsg %>
+				</div>
+				<%}%>
+            <div class="form-control">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" value="<% if(editing) { %> <%= product.title %> <% } %> ">
+            </div>  
+            <div class="form-control">  
+                <!-- <label for="imageUrl">Image URL</label>
+                <input type="url" name="imageUrl" id="imageUrl" value="<% if(editing) { %><%= product.imageUrl %><% } %> "> -->
+            </div>   
+            <div> 
+            <label for="image">Image</label>
+            <input type="file" name="image" id="image">
+            </div>
+            <div class="form-control">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" rows="5"
+                cols="43"><% if(editing) { %><%= product.description %><% } %></textarea>
+            </div>
+            <div class="form-control">
+            <label for="price">Price</label>
+            <input type="number" name="price" id="title" value="<% if(editing) { %><%= product.price %><% } %>">
+            <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+            </div>
+            <%if(editing) {%>
+            <input type="hidden" value="<%=product._id%>" name="productId">
+            <%}%>
+            <button class="bttn" type="submit"><% if(editing){%>Update Product<%} else{%>Add Product<%}%> </button>
+        </form>
+    </main>
+    <footer class="copyright">
+        <%if(isAuth) {%>
+        <ul>
+          <li><a href="/admin/add-product">Add Product</a></li>
+          <li><a href="/admin/admin-products">Admin Products</a></li>
+          <li><a>All Rights Reserved BooksOnCart.com</a></li>
+        </ul>
+        <%}%>
+    
+      </footer>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/product.css">
+
+</head>
+
+<body>
+  <%- include('../includes/navbar.ejs') %>
+  <main>
+    <section style="margin-top: 3rem;padding:0em;z-index:1;height:5%">
+      <div>
+        <img src="img/CrB-1.jpg" alt="" width="100%" height="30%">
+      </div>
+    </section>
+    <% if (prods.length>0){ %>
+    <div class="grid">
+      <% for(let product of prods){ %>
+      <article class="card product-item">
+        <header class="card__header">
+          <h1 class="product__title"><%=product.title%></h1>
+        </header>
+        <a style="text-decoration: none;color: inherit;" href="/products/<%=product._id%>">
+          <div class="card__image">
+            <img src="/<%=product.imageUrl%>">
+          </div>
+          <div class="card__content">
+            <h2 class="product__price">₹<%=product.price%></h2>
+            <p class="product__description"><%=product.description%></p>
+          </div>
+        </a>
+        <div class="card__actions">
+          <%- include('../includes/addToCart.ejs',{product:product}) %>
+        </div>
+      </article>
+      <% } %>
+    </div>
+    <% } else{ %>
+    <h>No Products</h>
+    <% } %>
+    <%- include('../includes/pagination.ejs') %>
+
+  </main>
+  <footer class="copyright">
+    <%if(isAuth) {%>
+    <ul>
+      <li><a href="/admin/add-product">Add Product</a></li>
+      <li><a href="/admin/admin-products">Admin Products</a></li>
+      <li><a>All Rights Reserved BooksOnCart.com</a></li>
+    </ul>
+    <%}%>
+
+  </footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</html>

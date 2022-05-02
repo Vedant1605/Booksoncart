@@ -1,0 +1,53 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+    <%- include('../includes/navbar.ejs') %>
+    <main style="margin: 5em 0em 0em 0em;">
+        <%if(orders.length>0){%>
+        <ul style="list-style: none;">
+            <% orders.forEach(order=>{ %>
+            <li>
+                <hr>
+                <h5 style="text-align: center;"><%=order.date%></h5>
+                <div style="     margin: 1em;display: flex; flex-direction: row; border: 1px solid rgba(49, 10, 10, 0.452);padding: 0.5em;
+                align-items: baseline;">
+                    <ul style="list-style: none;padding: 1em;">
+                        <% order.items.forEach(item=>{%>
+                       <div style="display: flex; flex-direction: row; ;
+                       align-items: baseline;">
+                            <li>
+                                <img src="/<%=item.productData.imageUrl%>" width="20em" height="20em">
+                            </li>
+                            <li style="margin: 0 2em;">
+                                <h5> <%=item.productData.title %></h5>
+                            </li>
+                            <li>
+                                <h5> Rs: <%=item.productData.price %> </h5>
+                            </li>
+                        </div>
+                        <%})%>
+                    </ul>
+                    <a  style="float: left; left: 2em; top: 2em;" href="/orders/<%=order._id%>">invoice</a>
+                </div>
+            </li>
+            <%})%>
+        </ul>
+        <%}else{%>
+        <p>Opps..!! Nothing here </p>
+        <%}%>
+    </main>
+    <footer class="copyright">
+        <%if(isAuth) {%>
+        <ul>
+          <li><a href="/admin/add-product">Add Product</a></li>
+          <li><a href="/admin/admin-products">Admin Products</a></li>
+          <li><a>All Rights Reserved BooksOnCart.com</a></li>
+        </ul>
+        <%}%>
+    
+      </footer>
+</body>
+
+</html>

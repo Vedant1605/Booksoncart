@@ -1,0 +1,15 @@
+<% if(isAuth) { %>
+    <div class="card__actions">
+        <form action="/cart" method="POST">
+            <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+            <button class="bttn" type="submit">Add to Cart</button>
+            <input type="hidden" name="productId" value="<%=product._id%>" >
+        </form>
+    </div>
+<% } else { %>
+    <div class="card__actions">
+        <form action="/login" method="GET">
+            <button class="bttn" type="submit">Login to add to cart</button>
+        </form>
+    </div>
+<% } %>

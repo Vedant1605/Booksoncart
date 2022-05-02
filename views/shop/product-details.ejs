@@ -1,0 +1,30 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/product.css">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <%- include('../includes/navbar.ejs') %>
+    <div class="m-5 details">
+        <img  style="border: 5px double rgba(104, 91, 91, 0.37);" src="/<%=product.imageUrl%>" class="mr-5" width="200em" height="250em">
+        <div class="media-body">
+            <h5 class="mt-0 my-3"><%=product.title%></h5>
+            <%=product.description%>
+            <h4 class="my-5">Price:<%=product.price%></h4>
+        </div>
+        <%- include('../includes/addToCart.ejs',{product:product}) %>
+    </div>
+</body>
+<footer class="copyright">
+    <%if(isAuth) {%>
+    <ul>
+      <li><a href="/admin/add-product">Add Product</a></li>
+      <li><a href="/admin/admin-products">Admin Products</a></li>
+      <li><a>All Rights Reserved BooksOnCart.com</a></li>
+    </ul>
+    <%}%>
+
+  </footer>
+</html>

@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: booksoncart.herokuapp.com
+Token: 6cbd18d46e46f8717c7400afbe53004f2b9294543b3ec7b1d5f2078980bb4030
