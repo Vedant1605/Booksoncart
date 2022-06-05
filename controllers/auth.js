@@ -4,11 +4,12 @@ const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
 const crypto = require('crypto');
 const { validationResult } = require('express-validator/check');
-
+const sgMail=require('@sendgrid/mail');
+sgMail.setApiKey(`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`)
 
 const transporter = nodemailer.createTransport(sendgridTransport({
   auth: {
-    api_key: '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'
+    api_key: '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'
   }
 }))
 
@@ -120,7 +121,7 @@ exports.postSignUp = (req, res, next) => {
     })
     .then(() => {
       res.redirect('/login')
-      return transporter.sendMail({
+      return sgMail.send({
         to: email,
         from: 'vedant.kuki4444@gmail.com',
         subject: 'Welcome to BooksOnCart',
@@ -136,6 +137,7 @@ exports.postSignUp = (req, res, next) => {
 };
 
 exports.getPasswordReset = (req, res, next) => {
+  console.log("shbvkdsbvhbHELLELELELLELEEEEEEEEEEEEEEEEE")
   let message = req.flash('error')
   if (message.length) {
     message = message[0]
@@ -157,19 +159,21 @@ exports.postPasswordReset = (req, res, next) => {
       return res.redirect('/reset')
     }
     const token = buffer.toString('hex')
+    console.log('tokenOfREST', token)
     User.findOne({ email: email }).then(user => {
       if (!user) {
         req.flash('error', `Email does't exits`)
         return res.redirect('/reset')
       }
-      console.log('token', token)
+      console.log('tokenOfREST', token)
       user.resetToken = token;
       user.resetTokenExpiration = Date.now() + 3600000;
       return user.save()
     })
       .then(() => {
+        console.log('redi', token)
         res.redirect('/login')
-        return transporter.sendMail({
+        return sgMail.send({
           to: email,
           from: 'vedant.kuki4444@gmail.com',
           subject: 'Welcome to BooksOnCart',
