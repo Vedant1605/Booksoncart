@@ -47,10 +47,13 @@ const fileFilter=(req,file,cb)=>{
 /************************  Middlewares *****************************/
 
 const app = express()
-const store = new mongoDbStore({
+const store =new mongoDbStore({
     uri: MONGODB_URI,
     collection: 'sessions'
 })
+store.on('error', function(error) {
+    console.log(error);
+  });
 app.set('view engine', 'ejs')
 app.set('views', 'views')
 /******************ONLY for Production************* */
